@@ -13,7 +13,7 @@ Extensions run with the rights of the app: there is no sandbox and no permission
 
 ## How to publish an extension
 
-1. Create a project, either from the template repository [`dolphy-app/dolphy-extension-template`](https://github.com/dolphy-app/dolphy-extension-template) (“Use this template”; every folder in its `extensions/` can be moved into this repository as it is), or with `npx --package=@dolphy-app/create-extension create-dolphy-extension <directory> --id <id>`.
+1. Create a project, either from the template repository [`dolphy-app/extension-template`](https://github.com/dolphy-app/extension-template) (“Use this template”; every folder in its `extensions/` can be moved into this repository as it is), or with `npx --package=@dolphy-app/create-extension create-dolphy-extension <directory> --id <id>`.
 2. Write the extension and check that it builds: `npx dolphy-ext build` (writes `dist-ext/<id>/`).
 3. Fork this repository and put the project in `extensions/<id>/`, where `<id>` is exactly the `id` from `extension.json`.
 4. Check it as the catalog will: `npx dolphy-ext catalog check extensions --ids <id> --skip-github-check`. List the rules with `npx dolphy-ext catalog check --list-rules`.
@@ -79,4 +79,4 @@ The first 0.5 publication replaces the `index.v2.json` written by the 0.4 tools 
 - **Revoking a version.** Add an entry to `revoked.json`, for example `{ "id": "acme.tool", "versions": "<1.2.0", "reason": "..." }`. Ranges `<`, `<=`, `>`, `>=`, `=` and their space-separated combinations are allowed. After the merge CI rebuilds the index; apps disable installed revoked versions on their next check.
 - **GitHub Pages.** The source is the `gh-pages` branch, root directory. The free GitHub plan serves Pages only from public repositories, so the repository must be public before the first publication.
 - **Branch protection.** Enable protection for `main` (required `PR check` status, merge only through a pull request) wherever your plan allows it.
-- **The index the app reads:** `https://dolphy-app.github.io/dolphy-extensions/index.v2.json`.
+- **The index the app reads:** `https://dolphy-app.github.io/extensions/index.v2.json`.

@@ -1,5 +1,5 @@
 {
-  "name": "dolphy-extensions",
+  "name": "extensions",
   "private": true,
   "description": "Dolphy extension catalog: the checking and building tools for CI",
   "engines": {
