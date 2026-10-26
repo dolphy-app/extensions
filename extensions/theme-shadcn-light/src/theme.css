@@ -1,0 +1,394 @@
+:root {
+  --sh-border: #e5e5e5;
+  --sh-input: #e5e5e5;
+  --sh-input-solid: #e5e5e5;
+  --sh-secondary-bg: #f5f5f5;
+  --sh-secondary-fg: #171717;
+  --sh-ring: #a1a1a1;
+  --sh-ring-soft: rgb(161 161 161 / 0.5);
+  --sh-accent: #f5f5f5;
+  --sh-outline-bg: #ffffff;
+  --sh-tab-active: #ffffff;
+  --sh-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --sh-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --sh-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* shadcn/ui look for Dolphy. Source of values: https://shadcn-css.com (CSS of the Button, Input, Card, Badge, Alert, Tabs, Accordion, Dialog, Tooltip, Checkbox, Switch and Progress components). Vuetify classes below are Vuetify's interface, not Dolphy API. */
+
+.v-application {
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'cv11', 'ss03';
+}
+
+/* Focus: a 3px ring instead of an outline */
+.v-btn:focus-visible,
+.v-chip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--sh-ring-soft);
+}
+
+/* Button: h-9, rounded-md, text-sm font-medium, no elevation */
+.v-btn {
+  --v-btn-height: 2.25rem;
+  border-radius: var(--dolphy-radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  box-shadow: none;
+}
+.v-btn.v-btn--size-small {
+  --v-btn-height: 2rem;
+  border-radius: var(--dolphy-radius-sm);
+}
+.v-btn.v-btn--size-large {
+  --v-btn-height: 2.5rem;
+}
+.v-btn.bg-secondary.v-btn--variant-elevated,
+.v-btn.bg-secondary.v-btn--variant-flat {
+  background-color: var(--sh-secondary-bg);
+  color: var(--sh-secondary-fg);
+}
+.v-btn--icon {
+  border-radius: var(--dolphy-radius-md);
+}
+.v-btn--variant-elevated,
+.v-btn--variant-flat {
+  box-shadow: none;
+}
+.v-btn--variant-outlined {
+  border: 1px solid var(--sh-input);
+  background-color: var(--sh-outline-bg);
+  box-shadow: var(--sh-shadow-xs);
+}
+.v-btn--variant-outlined .v-btn__overlay {
+  display: none;
+}
+.v-btn--variant-outlined:hover,
+.v-btn--variant-outlined.v-btn--active {
+  background-color: var(--sh-accent);
+}
+.v-btn:active {
+  scale: 0.98;
+}
+
+/* Text field and friends: h-9, 1px input border, ring on focus */
+.v-field {
+  --v-input-control-height: 2.25rem;
+  --v-field-padding-top: 0.375rem;
+  --v-field-padding-bottom: 0.375rem;
+  --v-field-input-padding-top: 0.375rem;
+  --v-field-input-padding-bottom: 0.375rem;
+  border-radius: var(--dolphy-radius-md);
+  font-size: 0.875rem;
+}
+.v-field--variant-outlined {
+  box-shadow: var(--sh-shadow-xs);
+}
+.v-field--variant-outlined .v-field__outline {
+  --v-field-border-width: 1px;
+  --v-field-border-opacity: 1;
+  color: var(--sh-input);
+}
+.v-field--variant-outlined.v-field--focused {
+  box-shadow: 0 0 0 3px var(--sh-ring-soft);
+}
+.v-field--variant-outlined.v-field--focused .v-field__outline {
+  --v-field-border-width: 1px;
+  color: var(--sh-ring);
+}
+.v-field--variant-outlined.v-field--error .v-field__outline {
+  color: rgb(var(--v-theme-error));
+}
+.v-field--variant-outlined.v-field--error.v-field--focused {
+  box-shadow: 0 0 0 3px color-mix(in oklab, rgb(var(--v-theme-error)) 20%, transparent);
+}
+.v-field--variant-outlined input::placeholder,
+.v-field--variant-outlined textarea::placeholder {
+  color: rgb(var(--v-theme-on-surface-variant));
+}
+
+/* Card: rounded-xl, 1px border, shadow-xs, 24px gaps */
+.v-card {
+  border-radius: var(--dolphy-radius-xl);
+  box-shadow: var(--sh-shadow-xs);
+}
+.v-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+}
+.v-card-subtitle {
+  font-size: 0.875rem;
+  opacity: 1;
+  color: rgb(var(--v-theme-on-surface-variant));
+}
+
+/* Badge (chip): rounded-md, text-xs font-medium */
+.v-chip {
+  --v-chip-height: 1.375rem;
+  border-radius: var(--dolphy-radius-md);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* Alert: neutral card with a 1px border; the type shows in the icon, an error colors the text */
+.v-alert {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--sh-border);
+  border-radius: var(--dolphy-radius-lg);
+  background: rgb(var(--v-theme-surface));
+  color: rgb(var(--v-theme-on-surface));
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.v-alert .v-alert__underlay,
+.v-alert .v-alert__overlay {
+  display: none;
+}
+.v-alert .v-alert__prepend {
+  align-self: flex-start;
+  margin-inline-end: 0.75rem;
+}
+.v-alert .v-alert__prepend .v-icon {
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.125rem;
+}
+.v-alert .v-alert-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: -0.0125em;
+}
+.v-alert .v-alert__content {
+  color: rgb(var(--v-theme-on-surface-variant));
+  font-size: 0.875rem;
+  letter-spacing: 0;
+}
+.v-alert .v-alert-title {
+  color: rgb(var(--v-theme-on-surface));
+}
+.v-alert.bg-error .v-alert-title,
+.v-alert.text-error .v-alert-title {
+  color: rgb(var(--v-theme-error));
+}
+.v-alert.bg-info .v-alert__prepend .v-icon,
+.v-alert.text-info .v-alert__prepend .v-icon {
+  color: rgb(var(--v-theme-info));
+}
+.v-alert.bg-success .v-alert__prepend .v-icon,
+.v-alert.text-success .v-alert__prepend .v-icon {
+  color: rgb(var(--v-theme-success));
+}
+.v-alert.bg-warning .v-alert__prepend .v-icon,
+.v-alert.text-warning .v-alert__prepend .v-icon {
+  color: rgb(var(--v-theme-warning));
+}
+.v-alert.bg-error,
+.v-alert.text-error {
+  color: rgb(var(--v-theme-error));
+}
+.v-alert.bg-error .v-alert__content,
+.v-alert.text-error .v-alert__content {
+  color: color-mix(in oklab, rgb(var(--v-theme-error)) 90%, transparent);
+}
+
+/* Tabs: a muted pill group with a raised active tab */
+.v-tabs {
+  --v-tabs-height: 2.25rem;
+  width: fit-content;
+  max-width: 100%;
+  padding: 3px;
+  border-radius: var(--dolphy-radius-lg);
+  background-color: rgb(var(--v-theme-surface-variant));
+  color: rgb(var(--v-theme-on-surface-variant));
+}
+.v-tab.v-btn {
+  height: calc(100% - 1px);
+  min-width: 0;
+  padding-inline: 0.5rem;
+  border-radius: var(--dolphy-radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.v-tab.v-tab--selected {
+  background-color: var(--sh-tab-active);
+  color: rgb(var(--v-theme-on-surface));
+  box-shadow: var(--sh-shadow-xs);
+}
+.v-tab .v-tab__slider {
+  display: none;
+}
+
+/* Accordion (VExpansionPanels): rows separated by a bottom border */
+.v-expansion-panels {
+  display: block;
+}
+.v-expansion-panel {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  border-bottom: 1px solid var(--sh-border);
+  color: inherit;
+}
+.v-expansion-panel::after,
+.v-expansion-panel__shadow {
+  display: none;
+}
+.v-expansion-panel--active:not(:first-child),
+.v-expansion-panel--active + .v-expansion-panel {
+  margin-top: 0;
+}
+.v-expansion-panel-title {
+  min-height: 0;
+  padding: 1rem 0;
+  border-radius: var(--dolphy-radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: 0;
+  gap: 1rem;
+}
+.v-expansion-panel-title:hover {
+  text-decoration: underline;
+}
+.v-expansion-panel-title--active {
+  min-height: 0;
+}
+.v-expansion-panel-title__overlay {
+  display: none;
+}
+.v-expansion-panel-title:focus-visible {
+  box-shadow: 0 0 0 3px var(--sh-ring-soft);
+}
+.v-expansion-panel-title__icon {
+  margin-inline-start: 0;
+  color: rgb(var(--v-theme-on-surface-variant));
+}
+.v-expansion-panel-title__icon .v-icon {
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+.v-expansion-panel-text__wrapper {
+  padding: 0 0 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+/* Menus, lists */
+.v-list {
+  background: transparent;
+}
+.v-list-item {
+  min-height: 2rem;
+  border-radius: var(--dolphy-radius-sm);
+  font-size: 0.875rem;
+}
+.v-menu > .v-overlay__content > .v-list,
+.v-menu > .v-overlay__content > .v-card {
+  padding: 0.25rem;
+  border: 1px solid var(--sh-border);
+  border-radius: var(--dolphy-radius-md);
+  background-color: rgb(var(--v-theme-surface-bright));
+  box-shadow: var(--sh-shadow-md);
+}
+
+/* Dialog */
+.v-overlay__scrim {
+  background: #000;
+  opacity: 0.5;
+}
+.v-dialog > .v-overlay__content > .v-card {
+  padding: 0.5rem;
+  border-radius: var(--dolphy-radius-lg);
+  box-shadow: var(--sh-shadow-lg);
+}
+
+.v-dialog .v-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.v-dialog .v-card-text {
+  color: rgb(var(--v-theme-on-surface-variant));
+  font-size: 0.875rem;
+}
+
+/* Tooltip: the primary color, text-xs */
+.v-tooltip > .v-overlay__content {
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--dolphy-radius-md);
+  background: rgb(var(--v-theme-primary));
+  color: rgb(var(--v-theme-on-primary));
+  font-size: 0.75rem;
+}
+
+/* Progress: h-2, full radius, the track is the primary color at 20% */
+.v-progress-linear {
+  border-radius: 9999px;
+}
+.v-progress-linear.v-progress-linear--active {
+  height: 0.5rem !important;
+}
+.v-progress-linear .v-progress-linear__background {
+  background: color-mix(in oklab, rgb(var(--v-theme-primary)) 20%, transparent);
+}
+.v-progress-linear .v-progress-linear__determinate,
+.v-progress-linear .v-progress-linear__indeterminate .v-progress-linear__indeterminate {
+  border-radius: 9999px;
+}
+
+/* Switch: a 32x18 track, a 16px thumb without shadow */
+.v-switch .v-switch__track {
+  width: 2rem;
+  min-width: 2rem;
+  height: 1.15rem;
+  border-radius: 9999px;
+  background: var(--sh-input-solid);
+  opacity: 1;
+  box-shadow: none;
+}
+.v-switch .v-selection-control--dirty .v-switch__track {
+  background: rgb(var(--v-theme-primary));
+}
+.v-switch .v-switch__thumb {
+  width: 1rem;
+  height: 1rem;
+  background: rgb(var(--v-theme-surface));
+  box-shadow: none;
+  color: transparent;
+}
+.v-switch .v-selection-control--dirty .v-switch__thumb {
+  background: rgb(var(--v-theme-on-primary));
+}
+
+/* Lists and menu items: text-sm, rounded-sm rows */
+.v-list-item .v-list-item-title {
+  font-size: 0.875rem;
+  letter-spacing: 0;
+  line-height: 1.25rem;
+}
+.v-list-item .v-list-item-subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0;
+}
+.v-card-text,
+.v-label,
+.v-field__input,
+.v-input__details,
+.v-messages {
+  letter-spacing: 0;
+}
+
+/* Divider */
+.v-divider {
+  opacity: 1;
+  border-color: var(--sh-border);
+}

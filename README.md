@@ -36,6 +36,8 @@ export const client = (c: { addTheme(theme: object): unknown }): void => {
 
 The themes in this repository keep the theme in `src/theme.json` and register it from `src/index.ts`.
 
+A theme can also change the shape of the interface (Dolphy 0.8.0 and newer). `tokens` sets the corner radii of Vuetify (`radius-sm`, `radius-md`, `radius-lg`, `radius-xl`) and the font (`font-family`); `css` is a style sheet that applies while the theme is selected. Keep the tokens in `src/theme.json`, import the style sheet as text with `import css from './theme.css?inline'` and pass `{ ...theme, css }` to `addTheme`. Fonts and images go in `assets/` and are addressed as `dolphy-ext://<id>/assets/…` from the style sheet (see [`theme-shadcn-light`](extensions/theme-shadcn-light) for a complete example). Such a theme needs `minAppVersion` `0.8.0`.
+
 ### What the catalog requires
 
 `dolphy-ext catalog check` (and the pull request check) requires, per extension:
