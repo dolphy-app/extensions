@@ -1,0 +1,18 @@
+{
+  "id": "theme-shadcn-dark",
+  "version": "1.0.2",
+  "apiVersion": 1,
+  "name": "shadcn Dark",
+  "description": {
+    "en": "The dark theme of shadcn/ui: neutral grays, a near-black accent, Inter and rounded controls with a soft focus ring",
+    "ru": "Тёмная тема shadcn/ui: нейтральные серые, светлый акцент, шрифт Inter и скруглённые элементы с мягким кольцом фокуса"
+  },
+  "author": "Tinkerbells",
+  "icon": "assets/icon.png",
+  "minAppVersion": "0.8.0",
+  "tags": [
+    "theme"
+  ],
+  "main": null,
+  "client": "./client.mjs"
+}
