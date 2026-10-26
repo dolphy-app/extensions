@@ -74,16 +74,32 @@
 
 /* Text field and friends: h-9, 1px input border, ring on focus */
 .v-field {
+  border-radius: var(--dolphy-radius-md);
+  font-size: 0.875rem;
+}
+.v-field--variant-outlined {
   --v-input-control-height: 2.25rem;
   --v-field-padding-top: 0.375rem;
   --v-field-padding-bottom: 0.375rem;
   --v-field-input-padding-top: 0.375rem;
   --v-field-input-padding-bottom: 0.375rem;
-  border-radius: var(--dolphy-radius-md);
-  font-size: 0.875rem;
-}
-.v-field--variant-outlined {
   box-shadow: var(--sh-shadow-xs);
+}
+/* The label floats into the notch of the outline and inherits the outline color: give it its own */
+.v-field .v-label.v-field-label,
+.v-field .v-label.v-field-label--floating {
+  color: rgb(var(--v-theme-on-surface-variant));
+  opacity: 1;
+  letter-spacing: 0;
+}
+.v-field .v-label.v-field-label--floating {
+  font-size: 0.75rem;
+}
+.v-field--focused .v-label.v-field-label--floating {
+  color: rgb(var(--v-theme-on-surface));
+}
+.v-field--error .v-label.v-field-label--floating {
+  color: rgb(var(--v-theme-error));
 }
 .v-field--variant-outlined .v-field__outline {
   --v-field-border-width: 1px;
@@ -384,6 +400,39 @@
 .v-field__input,
 .v-input__details,
 .v-messages {
+  letter-spacing: 0;
+}
+
+/* Slider: a 6px track, a 16px thumb with a 1px primary border */
+.v-slider {
+  --v-slider-track-size: 6px;
+  --v-slider-thumb-size: 16px;
+}
+.v-slider .v-slider-track__background {
+  background: rgb(var(--v-theme-surface-variant));
+  opacity: 1;
+  border-radius: 9999px;
+}
+.v-slider .v-slider-track__fill {
+  background: rgb(var(--v-theme-primary));
+  border-radius: 9999px;
+}
+.v-slider .v-slider-thumb__surface {
+  width: 1rem;
+  height: 1rem;
+  background: rgb(var(--v-theme-surface));
+  border: 1px solid rgb(var(--v-theme-primary));
+  box-shadow: var(--sh-shadow-xs);
+}
+
+/* Snackbar (toast): a card with a border */
+.v-snackbar__wrapper {
+  border: 1px solid var(--sh-border);
+  border-radius: var(--dolphy-radius-md);
+  background: rgb(var(--v-theme-surface-bright));
+  color: rgb(var(--v-theme-on-surface));
+  box-shadow: var(--sh-shadow-lg);
+  font-size: 0.875rem;
   letter-spacing: 0;
 }
 
