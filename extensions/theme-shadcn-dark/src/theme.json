@@ -23,8 +23,8 @@
     "on-success": "#0A0A0A",
     "info": "#51A2FF",
     "on-info": "#0A0A0A",
-    "hero-start": "#262626",
-    "hero-end": "#404040",
+    "hero-start": "#171717",
+    "hero-end": "#262626",
     "hero-contrast": "#FFFFFF"
   },
   "variables": {
