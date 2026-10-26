@@ -106,8 +106,23 @@
   --v-field-border-opacity: 1;
   color: var(--sh-input);
 }
-.v-field--variant-outlined.v-field--focused {
-  box-shadow: 0 0 0 3px var(--sh-ring-soft);
+.v-field--variant-outlined {
+  --sh-ring-now: var(--sh-ring-soft);
+}
+.v-field--variant-outlined.v-field--error {
+  --sh-ring-now: color-mix(in oklab, rgb(var(--v-theme-error)) 20%, transparent);
+}
+/* The ring is drawn per piece of the outline (start, notch, end) and skips the top of the notch: the floating label sits there */
+.v-field--variant-outlined.v-field--focused .v-field__outline__start {
+  box-shadow: 0 0 0 3px var(--sh-ring-now);
+  clip-path: inset(-3px 0.6px -3px -3px);
+}
+.v-field--variant-outlined.v-field--focused .v-field__outline__end {
+  box-shadow: 0 0 0 3px var(--sh-ring-now);
+  clip-path: inset(-3px -3px -3px 0.6px);
+}
+.v-field--variant-outlined.v-field--focused .v-field__outline__notch {
+  box-shadow: 0 3px 0 0 var(--sh-ring-now);
 }
 .v-field--variant-outlined.v-field--focused .v-field__outline {
   --v-field-border-width: 1px;
@@ -116,12 +131,15 @@
 .v-field--variant-outlined.v-field--error .v-field__outline {
   color: rgb(var(--v-theme-error));
 }
-.v-field--variant-outlined.v-field--error.v-field--focused {
-  box-shadow: 0 0 0 3px color-mix(in oklab, rgb(var(--v-theme-error)) 20%, transparent);
-}
 .v-field--variant-outlined input::placeholder,
 .v-field--variant-outlined textarea::placeholder {
   color: rgb(var(--v-theme-on-surface-variant));
+}
+
+/* The textarea fades its text under the label; with small paddings it clipped the first line */
+.v-textarea .v-field__input {
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 /* Card: rounded-xl, 1px border, shadow-xs, 24px gaps */
@@ -307,6 +325,9 @@
   border-radius: var(--dolphy-radius-sm);
   font-size: 0.875rem;
 }
+.v-menu > .v-overlay__content {
+  margin-block: 0.25rem;
+}
 .v-menu > .v-overlay__content > .v-list,
 .v-menu > .v-overlay__content > .v-card {
   padding: 0.25rem;
@@ -361,28 +382,45 @@
   border-radius: 9999px;
 }
 
-/* Switch: a 32x18 track, a 16px thumb without shadow */
+/* Switch: a 32x18 track and a 16px thumb drawn on the track (Vuetify's own thumb is hidden) */
 .v-switch .v-switch__track {
+  position: relative;
   width: 2rem;
   min-width: 2rem;
   height: 1.15rem;
+  padding: 0;
   border-radius: 9999px;
   background: var(--sh-input-solid);
   opacity: 1;
   box-shadow: none;
 }
+.v-switch .v-switch__track::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 1px;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: rgb(var(--v-theme-surface));
+  transform: translateY(-50%);
+  transition: left 0.15s;
+}
 .v-switch .v-selection-control--dirty .v-switch__track {
   background: rgb(var(--v-theme-primary));
 }
-.v-switch .v-switch__thumb {
-  width: 1rem;
-  height: 1rem;
-  background: rgb(var(--v-theme-surface));
-  box-shadow: none;
-  color: transparent;
-}
-.v-switch .v-selection-control--dirty .v-switch__thumb {
+.v-switch .v-selection-control--dirty .v-switch__track::after {
+  left: calc(100% - 1rem - 1px);
   background: rgb(var(--v-theme-on-primary));
+}
+.v-switch .v-selection-control--error:not(.v-selection-control--disabled) .v-switch__track {
+  background: rgb(var(--v-theme-error));
+}
+.v-switch .v-selection-control--disabled .v-switch__track {
+  opacity: 0.5;
+}
+.v-switch .v-switch__thumb {
+  display: none;
 }
 
 /* Lists and menu items: text-sm, rounded-sm rows */
@@ -434,6 +472,15 @@
   box-shadow: var(--sh-shadow-lg);
   font-size: 0.875rem;
   letter-spacing: 0;
+}
+
+/* The daily-plan hero card is drawn in the dark theme: its chip needs a visible fill */
+.hero .v-chip .v-chip__underlay {
+  background: #fff;
+  opacity: 0.16;
+}
+.hero.v-card {
+  border: 1px solid var(--sh-border);
 }
 
 /* Divider */

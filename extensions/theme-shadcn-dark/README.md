@@ -5,7 +5,7 @@ The dark theme of [shadcn/ui](https://ui.shadcn.com): neutral grays, a light acc
 - Contribution: the theme `theme-shadcn-dark` (“Settings → Appearance”; listed there as “shadcn Dark”).
 - Icon: `assets/icon.png`, a 128×128 miniature of the app drawn from the theme's colors. Regenerate it with `node scripts/theme-icon.mjs extensions/theme-shadcn-dark` from the repository root.
 - Layout (app 0.8 format): `extension.json` holds the metadata (`minAppVersion` 0.8.0, tag `theme`), `src/theme.json` holds the colors and the shape `tokens` (corner radii and the font), `src/theme.css` holds the style sheet and `src/index.ts` registers both from the `client` export with `addTheme`; `dolphy-ext build` inlines the CSS into `client.mjs`, and the style sheet addresses the font files as `dolphy-ext://theme-shadcn-dark/assets/fonts/…`. The theme has no server part. The extension runs with the rights of the app, but this one reads no files, uses no network and stores nothing.
-- Versions: 1.0.0 is the first release. 1.0.1 fixes the floating labels of outlined fields (they were nearly invisible), the black bars of skeleton loaders, the weight of sliders and the contrast of snackbars. Requires Dolphy 0.8.0 or newer: older apps reject the `tokens` and `css` keys of `addTheme`.
+- Versions: 1.0.0 is the first release. 1.0.1 fixes the floating labels of outlined fields (they were nearly invisible), the black bars of skeleton loaders, the weight of sliders and the contrast of snackbars. 1.0.2 draws the focus ring around the floating label of a field instead of through it, shows the first line of a textarea, draws the switch thumb inside its track and makes the chip and the border of the daily-plan card visible in the dark theme. Requires Dolphy 0.8.0 or newer: older apps reject the `tokens` and `css` keys of `addTheme`.
 - Base: a dark theme (`dark: true`). The style sheet is active only while this theme is selected and changes how Vuetify components look (buttons, fields, cards, chips, alerts, tabs, lists, menus, dialogs, tooltips, switches, progress bars and accordions); it does not change layout or behavior.
 - Font: Inter (variable, Latin and Cyrillic subsets) is shipped as `woff2` files in `assets/fonts` and loaded from the extension; the theme falls back to the system font if loading fails.
 
@@ -58,5 +58,5 @@ WCAG 2.x contrast ratios computed from the colors in `src/theme.json`. Text pair
 | `warning / surface` | 10.41:1 | 4.5:1 | yes |
 | `success / surface` | 10.08:1 | 4.5:1 | yes |
 | `info / surface` | 6.80:1 | 4.5:1 | yes |
-| `hero-contrast / hero-start` | 15.13:1 | 4.5:1 | yes |
-| `hero-contrast / hero-end` | 10.37:1 | 4.5:1 | yes |
+| `hero-contrast / hero-start` | 17.93:1 | 4.5:1 | yes |
+| `hero-contrast / hero-end` | 15.13:1 | 4.5:1 | yes |
